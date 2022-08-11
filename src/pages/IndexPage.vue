@@ -1,33 +1,21 @@
 <template>
   <q-page padding>
-    <q-btn @click="access">Login!</q-btn>
+    <!-- <q-btn @click="userStore.access">Login</q-btn> -->
     <q-btn @click="createLink">Create link</q-btn>
+    <!-- <q-btn @click="userStore.logout">Logout</q-btn> -->
     <br />
     <br />
-    {{ token }} {{ expiresIn }}
+    {{ userStore.token }} {{ userStore.expiresIn }}
   </q-page>
 </template>
 
 <script setup>
 import { api } from "src/boot/axios";
-import { ref } from "vue";
+import { useUserStore } from "../stores/user-store";
 
-const token = ref("");
-const expiresIn = ref("");
+const userStore = useUserStore();
 
-const access = () => {
-  api
-    .post("/auth/login", {
-      email: "lauti@gmail.com",
-      password: "onepiece",
-    })
-    .then((res) => {
-      token.value = res.data.token;
-      expiresIn.value = res.data.expiresIn;
-      setTime();
-    })
-    .catch((e) => console.log(e));
-};
+// userStore.refreshToken();
 
 const createLink = async () => {
   try {
@@ -47,23 +35,4 @@ const createLink = async () => {
     console.log(error);
   }
 };
-
-const setTime = () => {
-  setTimeout(() => {
-    console.log("Token refreshed");
-    refreshToken();
-  }, expiresIn.value * 1000 - 6000);
-};
-
-const refreshToken = async () => {
-  try {
-    const res = await api.get("/auth/refresh");
-    token.value = res.data.token;
-    expiresIn.value = res.data.expiresIn;
-    setTime();
-  } catch (error) {
-    console.log(error);
-  }
-};
-refreshToken();
 </script>
