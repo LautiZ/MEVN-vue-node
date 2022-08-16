@@ -1,15 +1,16 @@
 <template>
   <q-page padding>
-    <h3 class="text-center">Add link</h3>
+    <h2>Home page</h2>
     <AddLink></AddLink>
-    <pre>
-      {{ useLink.links }}
-    </pre>
-    <!-- <template> -->
-    <div class="row">
-      <LinkCard class="col-4" v-for="link in useLink.links" :key="link._id" />
+    <div class="row" style="width: 90%; margin: auto">
+      <h4 class="q-my-md full-width">Your links</h4>
+      <LinkCard
+        class="col-3"
+        v-for="link in useLink.links"
+        :key="link._id"
+        :link="link"
+      />
     </div>
-    <!-- </template> -->
   </q-page>
 </template>
 

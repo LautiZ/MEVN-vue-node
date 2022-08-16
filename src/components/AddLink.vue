@@ -28,18 +28,27 @@ const addLink = async () => {
 </script>
 
 <template>
-  <q-form @submit.prevent="addLink">
-    <q-input
-      v-model="link"
-      label="Enter link"
-      :rules="[(val) => (val && val.trim() !== '') || 'Please write something']"
-    ></q-input>
-    <q-btn
-      class="q-mt-sm full-width"
-      label="Agregar"
-      color="blue-grey-9"
-      type="submit"
-      :loading="loading"
-    ></q-btn>
-  </q-form>
+  <div bordered class="my-card" style="width: 60%; margin: auto">
+    <div>
+      <h4 class="text-center q-mb-xs">Add link</h4>
+    </div>
+    <div>
+      <q-form @submit.prevent="addLink">
+        <q-input
+          v-model="link"
+          label="Enter link"
+          :rules="[
+            (val) => (val && val.trim() !== '') || 'Please write something',
+          ]"
+        ></q-input>
+        <q-btn
+          class="q-mt-sm full-width"
+          label="Agregar"
+          color="blue-grey-8"
+          type="submit"
+          :loading="loading"
+        ></q-btn>
+      </q-form>
+    </div>
+  </div>
 </template>
