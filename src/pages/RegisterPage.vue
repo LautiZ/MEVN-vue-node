@@ -73,7 +73,7 @@ const alertDialogBack = (message = "Error en el servidor") => {
         </q-input>
 
         <div>
-          <q-btn label="Login" type="submit"></q-btn>
+          <q-btn class="q-mt-sm" label="Register" type="submit"></q-btn>
         </div>
       </q-form>
     </div>

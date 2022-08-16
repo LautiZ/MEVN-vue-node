@@ -1,7 +1,7 @@
 <template>
   <q-layout view="lHh Lpr lFf">
     <q-header elevated>
-      <q-toolbar>
+      <q-toolbar class="bg-blue-grey-9">
         <q-btn
           flat
           dense
@@ -11,33 +11,33 @@
           @click="toggleLeftDrawer"
         />
 
-        <q-toolbar-title> Quasar App </q-toolbar-title>
+        <q-toolbar-title> App with nodejs and vue </q-toolbar-title>
 
-        <q-btn class="q-mr-sm" color="dark" to="/" v-if="userStore.token"
-          >Inicio</q-btn
-        >
         <q-btn class="q-mr-sm" color="green" to="/login" v-if="!userStore.token"
           >Login</q-btn
         >
-        <q-btn color="green" to="/register" v-if="!userStore.token"
+        <q-btn color="cyan-7" to="/register" v-if="!userStore.token"
           >Register</q-btn
+        >
+        <q-btn class="q-mr-sm" color="cyan-7" to="/" v-if="userStore.token"
+          >Inicio</q-btn
         >
         <q-btn
           class="q-mr-sm"
-          color="red"
-          @click="logout"
+          color="orange-6"
+          to="/protected"
           v-if="userStore.token"
-          >Logout</q-btn
-        >
-        <q-btn color="orange" to="/protected" v-if="userStore.token"
           >Protected</q-btn
+        >
+        <q-btn color="red-10" @click="logout" v-if="userStore.token"
+          >Logout</q-btn
         >
       </q-toolbar>
     </q-header>
 
     <q-drawer v-model="leftDrawerOpen" show-if-above bordered>
       <q-list>
-        <q-item-label header> Essential Links </q-item-label>
+        <q-item-label header> More info </q-item-label>
 
         <EssentialLink
           v-for="link in essentialLinks"
@@ -79,46 +79,28 @@ function toggleLeftDrawer() {
 
 const essentialLinks = [
   {
-    title: "Docs",
-    caption: "quasar.dev",
-    icon: "school",
-    link: "https://quasar.dev",
-  },
-  {
     title: "Github",
-    caption: "github.com/quasarframework",
+    caption: "github.com",
     icon: "code",
-    link: "https://github.com/quasarframework",
+    link: "https://github.com/LautiZ",
   },
   {
-    title: "Discord Chat Channel",
-    caption: "chat.quasar.dev",
-    icon: "chat",
-    link: "https://chat.quasar.dev",
-  },
-  {
-    title: "Forum",
-    caption: "forum.quasar.dev",
-    icon: "record_voice_over",
-    link: "https://forum.quasar.dev",
-  },
-  {
-    title: "Twitter",
-    caption: "@quasarframework",
-    icon: "rss_feed",
-    link: "https://twitter.quasar.dev",
-  },
-  {
-    title: "Facebook",
-    caption: "@QuasarFramework",
+    title: "Studies",
+    caption: "linkedin",
     icon: "public",
-    link: "https://facebook.quasar.dev",
+    link: "https://www.linkedin.com/in/lautaro-zullo-961288195/",
   },
   {
-    title: "Quasar Awesome",
-    caption: "Community Quasar projects",
+    title: "FreeCodeCamp",
+    caption: "Cerfificate",
+    icon: "school",
+    link: "https://www.freecodecamp.org/espanol/certification/fcc45fe620d-30f9-4c48-ac8b-361fca74a7d7/javascript-algorithms-and-data-structures",
+  },
+  {
+    title: "Social media",
+    caption: "Instagram",
     icon: "favorite",
-    link: "https://awesome.quasar.dev",
+    link: "https://www.instagram.com/lautizullo/",
   },
 ];
 </script>

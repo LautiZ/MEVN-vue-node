@@ -1,0 +1,45 @@
+<script setup>
+import { ref } from "vue";
+import { useLinkStore } from "src/stores/link-store";
+import { useNotify } from "../composables/notifyHook";
+
+const useLink = useLinkStore();
+const { showNotify } = useNotify();
+const link = ref("");
+const loading = ref(false);
+
+const addLink = async () => {
+  try {
+    loading.value = true;
+    await useLink.createLink(link.value);
+    showNotify("Link created", "green", "tag_faces");
+    link.value = "";
+  } catch (error) {
+    if (error.errors) {
+      return error.errors.forEach((item) => {
+        showNotify(item.msg, "negative", "report_problem");
+      });
+    }
+    showNotify("Error when adding link", "negative", "report_problem");
+  } finally {
+    loading.value = false;
+  }
+};
+</script>
+
+<template>
+  <q-form @submit.prevent="addLink">
+    <q-input
+      v-model="link"
+      label="Enter link"
+      :rules="[(val) => (val && val.trim() !== '') || 'Please write something']"
+    ></q-input>
+    <q-btn
+      class="q-mt-sm full-width"
+      label="Agregar"
+      color="blue-grey-9"
+      type="submit"
+      :loading="loading"
+    ></q-btn>
+  </q-form>
+</template>
