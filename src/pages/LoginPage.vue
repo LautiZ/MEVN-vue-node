@@ -10,6 +10,8 @@ const userStore = useUserStore();
 
 const router = useRouter();
 
+const formLogin = ref(null);
+
 const email = ref("");
 const password = ref("");
 
@@ -20,6 +22,8 @@ const handleSubmit = async () => {
 
     email.value = "";
     password.value = "";
+
+    formLogin.value.resetValidation();
   } catch (error) {
     alertDialogBack(error.error);
   }
@@ -37,7 +41,7 @@ const alertDialogBack = (message = "Error en el servidor") => {
   <q-page padding class="row justify-center">
     <div class="col-12 col-sm-6 col-md-5">
       <h3>Login</h3>
-      <q-form @submit.prevent="handleSubmit">
+      <q-form @submit.prevent="handleSubmit" ref="formLogin">
         <q-input
           v-model="email"
           label="Email address"
@@ -48,6 +52,7 @@ const alertDialogBack = (message = "Error en el servidor") => {
               /^[^@]+@[^@]+\.[a-zA-Z]{2,}$/.test(val) ||
               'Incorrect email format',
           ]"
+          lazy-rules
         >
         </q-input>
         <q-input
@@ -58,6 +63,7 @@ const alertDialogBack = (message = "Error en el servidor") => {
             (val) =>
               (val && val.length > 5) || 'Minimum 6 characters for password',
           ]"
+          lazy-rules
         >
         </q-input>
 

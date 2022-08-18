@@ -5,6 +5,9 @@ import { useNotify } from "../composables/notifyHook";
 
 const useLink = useLinkStore();
 const { showNotify } = useNotify();
+
+const formAdd = ref(null);
+
 const link = ref("");
 const loading = ref(false);
 
@@ -14,6 +17,7 @@ const addLink = async () => {
     await useLink.createLink(link.value);
     showNotify("Link created", "green", "tag_faces");
     link.value = "";
+    formAdd.value.resetValidation();
   } catch (error) {
     if (error.errors) {
       return error.errors.forEach((item) => {
@@ -33,13 +37,14 @@ const addLink = async () => {
       <h4 class="text-center q-mb-xs">Add link</h4>
     </div>
     <div>
-      <q-form @submit.prevent="addLink">
+      <q-form @submit.prevent="addLink" ref="formAdd">
         <q-input
           v-model="link"
           label="Enter link"
           :rules="[
             (val) => (val && val.trim() !== '') || 'Please write something',
           ]"
+          lazy-rules
         ></q-input>
         <q-btn
           class="q-mt-sm full-width"

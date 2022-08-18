@@ -27,7 +27,7 @@
           color="orange-6"
           to="/protected"
           v-if="userStore.token"
-          >Protected</q-btn
+          >More info</q-btn
         >
         <q-btn color="red-10" @click="logout" v-if="userStore.token"
           >Logout</q-btn
